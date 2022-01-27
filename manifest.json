@@ -1,0 +1,32 @@
+{
+  "name": "말머리",
+  "description": "말머리 저장 및 자동 적용",
+  "version": "0.2",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://cafe.naver.com/ca-fe/cafes/27842958/articles/write*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/ddong_16.png",
+      "32": "/images/ddong_32.png",
+      "48": "/images/ddong_48.png",
+      "128": "/images/ddong_128.png"
+    }
+  },
+  "icons": {
+    "16": "/images/ddong_16.png",
+    "32": "/images/ddong_32.png",
+    "48": "/images/ddong_48.png",
+    "128": "/images/ddong_128.png"
+  }
+}
