@@ -18,7 +18,16 @@ function boardClick(board_input = "자유게시판") {
   // console.log(boardData);
 
   // let board_input = "자유게시판"; //선택 가능한 게시판 변수
-  let selectedIndex = boardData.indexOf(board_input);
+
+  let selectedIndex = 0;
+
+  boardData.forEach((val, index) => {
+    if (val.includes(board_input)) {
+      selectedIndex = index;
+    }
+  });
+
+  // let selectedIndex = boardData.indexOf(board_input);
 
   // console.log(board_input);
   // console.log(selectedIndex);
@@ -29,18 +38,27 @@ function boardClick(board_input = "자유게시판") {
 }
 
 function categoryClick(category_input = "내가 싼 똥") {
-  window.setTimeout(() => {
-    let result = document.getElementsByClassName("option_list");
+  let count = 0;
 
-    // console.log(result);
+  let interval = setInterval(function () {
+    findCategory();
+    count++;
+    if (count >= 20) {
+      console.log("stop");
+      clearInterval(interval);
+    }
+  }, 200);
 
-    const categories = result[1].childNodes;
+  const findCategory = () => {
+    let optionList = document.getElementsByClassName("option_list");
 
-    // console.log(categories.length);
+    console.log(optionList);
 
-    if (categories.length < 1) {
-      categoryClick();
-    } else {
+    const categories = optionList[1].childNodes;
+
+    console.log(categories.length);
+
+    if (categories.length > 0) {
       let categoryData = [];
 
       categories.forEach((val) => {
@@ -49,14 +67,29 @@ function categoryClick(category_input = "내가 싼 똥") {
         categoryData.push(text);
       });
 
-      // console.log(categoryData);
+      console.log(categoryData);
 
       // let category_input = "내가 싼 똥"; //선택 가능한 게시판 변수
-      let categoryIndex = categoryData.indexOf(category_input);
 
-      categories[categoryIndex].firstElementChild.click();
+      let categoryIndex = -1;
+
+      categoryData.forEach((val, index) => {
+        console.log(val, category_input, index);
+        if (val.includes(category_input)) {
+          categoryIndex = index;
+        }
+      });
+
+      if (categoryIndex !== -1) {
+        console.log(categoryData, category_input, categoryIndex);
+
+        // let categoryIndex = categoryData.indexOf(category_input);
+
+        categories[categoryIndex].firstElementChild.click();
+        clearInterval(interval);
+      }
     }
-  }, 100);
+  };
 }
 
 window.onload = function () {
