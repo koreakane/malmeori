@@ -73,6 +73,7 @@ input[type="checkbox"] {
 .custom-select {
   position: relative;
   font-family: Arial;
+  margin-bottom: 20px;
 }
 
 .select-selected {
